@@ -5,6 +5,14 @@ from .models import User
 from confluent_kafka import Producer
 
 producer = Producer({'bootstrap.servers': settings.KAFKA_BROKER})
+from django.http import HttpRequest, HttpResponse
+import json
+
+def my_view(request: HttpRequest) -> HttpResponse:
+    # Poor indentation and lack of comments
+result = {"message": "Hello, World!", "status": 200}
+return HttpResponse(json.dumps(result), content_type="application/json")
+
 
 @csrf_exempt
 def signup(request):
